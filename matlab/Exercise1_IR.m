@@ -18,16 +18,23 @@ legend(num2str([900 1600 4000]'))
 
 %% Repetition time TR changes
 %% effect of TR
-signal=IR_TR_signal(TI, T1, 5*T1);
-figure, plot(TI, signal, '.'), title('Long TR');
+TR_short = 800;
+TR_long = 10000;
 
-signal=IR_TR_signal(TI, T1, T1);
-figure, plot(TI, signal, '.'), title('Short TR');
+% calculating effect of insufficient relaxation on available magnetization
+m_ss_tr_long = calculate_steady_state_magnetization(T1, TR_long, 1.0);
+m_ss_tr_short = calculate_steady_state_magnetization(T1, TR_short, 1.0);
+
+% plot
+signal_tr_long=t1_ir_rho(TI, T1, 1.0, m_ss_tr_long);
+figure, plot(TI, signal_tr_long, '.'), title('Long TR');
+
+signal_tr_short=t1_ir_rho(TI, T1, 1.0, m_ss_tr_short);
+figure, plot(TI, signal_tr_short, '.'), title('Short TR');
 
 
-%% fitting short and long TR data
+%% fitting short and long TR data with standard T1 relaxation model
 
-signal=IR_TR_signal(TI, T1, 5*T1);
 [T1_long, I0_long] = IR_T1_fit(signal, TI)
 fit_signal=I0_long*IR_TR_signal(TI, T1_long, 1000000);
 

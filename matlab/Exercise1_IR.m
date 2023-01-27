@@ -8,13 +8,17 @@ T1 = 900; % ms in gray matter
 TI = 1:100:5000; % ms
 TR = 5*T1; % long TR experiment
 rho = 1; % optimal inversion efficiency
+m_0 = 1.0; % take initial magnetization as normalized to 1
 
 %% Plot curves for different T1 times
-signal=[t1_relaxation(TI, 900, 5*4000); t1_relaxation(TI, 1600, 5*4000); t1_relaxation(TI, 4000, 5*4000)];
+signal=[t1_relaxation(TI, 900, 1.0); t1_relaxation(TI, 1600, 1.0); t1_relaxation(TI, 4000, 1.0)];
 figure, plot(TI, signal, '.'); 
 hold on
 title('Different T1 [ms]');
 legend(num2str([900 1600 4000]'))
+
+% clean up workspace when moving forward
+clearvars signal
 
 %% Repetition time TR changes
 %% effect of TR
@@ -35,72 +39,86 @@ figure, plot(TI, signal_tr_short, '.'), title('Short TR');
 
 %% fitting short and long TR data with standard T1 relaxation model
 
-[T1_long, I0_long] = IR_T1_fit(signal, TI)
-fit_signal=I0_long*IR_TR_signal(TI, T1_long, 1000000);
+[T1_long, I0_long] = IR_T1_fit(signal_tr_long, TI)
+fit_signal_trl=I0_long*t1_relaxation(TI, T1_long, I0_long);
 
 figure, title('Long TR');
 hold on
-plot(TI, signal, '.');
-plot(TI, fit_signal, 'g');
+plot(TI, signal_tr_long, '.');
+plot(TI, fit_signal_trl, 'g');
 hold off
 
-signal=IR_TR_signal(TI, T1, 1*T1);
-[T1_short, I0_short] = IR_T1_fit(signal, TI)
-fit_signal=I0_short*IR_TR_signal(TI, T1_short, 1000000);
+[T1_short, I0_short] = IR_T1_fit(signal_tr_short, TI)
+fit_signal_trs=I0_short*t1_relaxation(TI, T1_short, I0_short);
 
 figure, title('Short TR');
 hold on
-plot(TI, signal, '.');
-plot(TI, fit_signal, 'g');
+plot(TI, signal_tr_short, '.');
+plot(TI, fit_signal_trs, 'g');
 hold off
 
-
-
-
+% clean up workspace when moving forward
+clearvars signal_tr_short signal_tr_long T1_short T1_long TR_short TR_long
+clearvars m_ss_tr_short m_ss_tr_long I0_short I0_long
+clearvars fit_signal_trs fit_signal_trl
 
 %% Inversion Efficiency
 
 %% effect of inversion efficiency
-signal=IR_rho_signal(TI, T1, 1.0); % full inversion with rho = 1
+
+signal=t1_ir_rho(TI, T1, 1.0, m_0); % full inversion with rho = 1
 figure, plot(TI, signal, '.'), title('Optimal inversion');
 
-signal=IR_rho_signal(TI, T1, 0.8); % incomplete inversion with rho = 0.8
+signal=t1_ir_rho(TI, T1, 0.75, m_0); % incomplete inversion with rho = 0.75
 figure, plot(TI, signal, '.'), title('Incomplete inversion');
 
+% clean up workspace when moving forward
+clearvars signal
 
 %% fitting long TR data with different inversion efficiency rho
-signal=IR_rho_signal(TI, T1, 1.0); % full inversion with rho = 1
-[T1_full, I0_full] = IR_T1_fit(signal, TI)
-fit_signal=I0_full*IR_TR_signal(TI, T1_full, 1000000);
+% again we consider using the standard t1 relaxation model, i.e. 
+% what happens if we dont account for the effect of ineffective inversions
+
+rho_1 = 1.0;    % full inversion with rho = 1
+signal_r1=t1_ir_rho(TI, T1, rho_1, m_0);
+% fit
+[T1_r1, I0_r1] = IR_T1_fit(signal_r1, TI)
+fit_signal_r1=t1_relaxation(TI, T1_r1, I0_r1);
 
 figure, title('Full inversion');
 hold on
-plot(TI, signal, '.');
-plot(TI, fit_signal, 'g');
+plot(TI, signal_r1, '.');
+plot(TI, fit_signal_r1, 'g');
 hold off
 
-signal=IR_rho_signal(TI, T1, 0.8); % incomplete inversion with rho = 0.8
-[T1_inc, I0_inc] = IR_T1_fit(signal, TI)
-fit_signal=I0_inc*IR_TR_signal(TI, T1_inc, 1000000);
+rho_2 = 0.75;   % incomplete inversion with rho = 0.75
+signal_r2=t1_ir_rho(TI, T1, rho_2, m_0); 
+% fit
+[T1_r2, I0_r2] = IR_T1_fit(signal_r2, TI)
+fit_signal_r2=t1_relaxation(TI, T1_r2, I0_r2);
 
 figure, title('Incomplete inversion');
 hold on
-plot(TI, signal, '.');
-plot(TI, fit_signal, 'g');
+plot(TI, signal_r2, '.');
+plot(TI, fit_signal_r2, 'g');
 hold off
 
-
+% clean up workspace when moving forward
+clearvars fit_signal_r2 fit_signal_r1 I0_r2 I0_r1 rho_1 rho_2
+clearvars signal_r2 signal_r1 T1_r2 T1_r1
 
 %% fitting data and accounting for incomplete inversion
 
-signal=IR_rho_signal(TI, T1, 0.8); % incomplete inversion with rho = 0.8
-[T1_adj, rho_adj, I0_adj] = IR_rho_T1_fit(signal, TI)
-fit_signal=I0_adj*IR_rho_signal(TI, T1_adj, rho_adj);
+rho = 0.75; % incomplete inversion with rho = 0.75
+signal_r=t1_ir_rho(TI, T1, rho, m_0);
+% fit accounting for inefficient inversion
+[T1_fit, rho_fit, I0_fit] = IR_rho_T1_fit(signal_r, TI)
+fit_signal_r=t1_ir_rho(TI, T1_fit, rho_fit, I0_fit);
 
 figure, title('Incomplete inversion but with rho fit');
 hold on
-plot(TI, signal, '.');
-plot(TI, fit_signal, 'g');
+plot(TI, signal_r, '.');
+plot(TI, fit_signal_r, 'g');
 hold off
 
 

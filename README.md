@@ -13,7 +13,7 @@ All material is provided as matlab scripts for use with a matlab instance and SP
 ### python    (Exercises 1 - 3)
 There is jupyter notebooks provided for Exercises *1-3* under `python/`.
 To:
-- Use from [Google Colab](https://colab.research.google.com). $\leftarrow$ **Click Link - switch to Github tab on landing page - Search this very github**:`https://github.com/schmidtijoe/qMRI-workshop` and the notebooks should be available to be hostet in Colab. You can execute all cells there and run through in your browser.
+- Use from [Google Colab](https://colab.research.google.com). $\leftarrow$ **Click Link - switch to Github tab on landing page - Search this very github**:`https://github.com/schmidtijoe/qMRI-workshop` and the notebooks should be available to be hosted in Colab. You can execute all cells there and run through in your browser.
 - Run from your own favorite distribution: (check requirements.txt)
 
 ## Material / Exercises

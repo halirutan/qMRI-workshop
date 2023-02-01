@@ -1,6 +1,6 @@
 
-python == 3.9.13
-numpy == 1.22.3
+python == 3.9.0
+numpy >= 1.22.0
 nibabel == 5.0.0
 matplotlib == 3.6.1
 simple-parsing == 0.0.20

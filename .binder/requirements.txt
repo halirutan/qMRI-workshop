@@ -1,0 +1,7 @@
+matplotlib
+
+nibabel==5.0.0
+python==3.8.15
+tqdm==4.64.0
+scipy==1.9.0
+numpy==1.22.0

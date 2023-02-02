@@ -3,7 +3,7 @@
 ## Setup
 
 ### matlab    (Exercises 1 - 5)
-All material is provided as matlab scripts for use with a matlab instance and SPM, make sure to add the path of the project to make functions available.
+All material is provided as matlab scripts under `matlab/` for use with a matlab instance and SPM, make sure to add the path of the project to make functions available.
 [Matlab](http://www.mathworks.com/products/matlab/) + [SPM](https://www.fil.ion.ucl.ac.uk/spm/software/download/)
 
 *Software Requirements:* You need to get the following dependencies and add them to your matlab path (best clone them all within one directory and add the directory as seen in the matlab exercise scripts):

@@ -16,6 +16,8 @@ addpath(genpath(path_to_gits));
 % set data path to examples of M0_to_PD git
 data_path = fullfile(path_to_gits, 'M0_to_PD/Example Data/');
 
+% start spm for helper functions and for displaying results
+% spm fmri
 %% Load data
 % set up path
 
@@ -69,8 +71,8 @@ showMontage(PD.data(:,:,70:81)); title('PD in vivo');clim([0 2]);
 
 %% In case it takes to long we can  visualize the pre calculate results
 
-PD_expected=readFileNifti(fullfile(data_path, 'WF_expected.nii.gz'));  % BM
-showMontage(PD_expected.data(:,:,70:81)); title('PD in vivo *precalculated');clim([0 2]);
+PD_expected=readFileNifti(fullfile(data_path, WF_expected.nii.gz'));  % BM
+showMontage(PD_expected.data(:,:,70:81)); title('PD in vivo');clim([0 2]);
 
 
 %% Let's visualize the estimated Coil gain:
@@ -80,11 +82,10 @@ showMontage(PD_expected.data(:,:,70:81)); title('PD in vivo *precalculated');cli
 showMontage(G(:,:,70:81)); title('Coil gain estimates');clim([0 4000]);
 
 %% In the last step we try to find the WF and MTV.
-% in this step we need to calculate the water refernce. 
-% Using an appropriate ventrical ROI we estimated the normailzation
-% of this data to be 1.2.
+% in this step we need to calculate the water refernce. using an appropriate ventrical ROI
+% we estimate the normailzation is this data to be 1.2 using a ventrical ROI.
 WF=PD.data./1.2; 
-
+%
 %Let's visualize the WM map and the typical values in GM and WM
 showMontage(WF(:,:,70:81)); title('WF in vivo');clim([0.1 1]);
 figure;boxplot(WF(seg.data==1000),'symbol',''); title(['WM median value ' num2str(median(WF(seg.data==1000))) ]);ylim([0.4 1]);ylabel( 'WF') ;xlabel('WM')
@@ -92,7 +93,7 @@ figure;boxplot(WF(seg.data==2000),'symbol',''); title(['GM median value ' num2st
 
 % MTV is define as 1-WF
 MTV=1-WF; 
-
+%
 %Let's visualize the MTV map and the typical values in GM and WM
 showMontage(MTV(:,:,70:81)); title('MTV in vivo');clim([0 0.5]);
 figure;boxplot(MTV(seg.data==1000),'symbol',''); title(['WM median value ' num2str(median(MTV(seg.data==1000))) ]);ylim([0 0.6]);ylabel( 'MTV') ;xlabel('WM')

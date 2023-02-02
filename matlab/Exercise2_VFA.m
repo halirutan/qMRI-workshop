@@ -1,5 +1,8 @@
 % Exercise 2: FLASH with Variable Flip Angle (VFA): Signal and Fit
 % created: N. Weiskopf, MPI-CBS, Leipzig; 3/6/16
+%% clearing workspace
+clear
+clc
 
 % It is assumed or on the qMRI/workshop/matlab path
 addpath(genpath('./functions/'))

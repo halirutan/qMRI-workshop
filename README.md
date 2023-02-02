@@ -10,6 +10,8 @@ All material is provided as matlab scripts under `matlab/` for use with a matlab
 - Exercise 4: [Mezerlab - M0_to_PD](https://github.com/MezerLab/M0_to_PD) + [Vistasoft](https://github.com/vistalab/vistasoft)
 - Exercise 5: [Mezerlab - MDM](https://github.com/MezerLab/MDM_toolbox) + [boundedline - pkg](https://github.com/kakearney/boundedline-pkg)
 
+Easiest is to copy the data folder (see below) to `matlab/` and `cd` there inside *matlab*. You can then use the scripts as they are. only note the directory to which you cloned the above git repositories.
+
 ### python    (Exercises 1 - 3)
 There is jupyter notebooks provided for Exercises *1-3* under `python/`.
 To:

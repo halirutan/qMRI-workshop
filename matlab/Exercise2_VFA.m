@@ -1,6 +1,8 @@
 % Exercise 2: FLASH with Variable Flip Angle (VFA): Signal and Fit
 % created: N. Weiskopf, MPI-CBS, Leipzig; 3/6/16
 
+% It is assumed or on the qMRI/workshop/matlab path
+addpath(genpath('./functions/'))
 
 %% Typical values for T1, TR, TI, inversion efficiency at 3T
 T1 = 900; % ms in gray matter 
@@ -24,6 +26,7 @@ plot(alpha, signal, '.');
 xlabel('alpha (deg)');
 hold off
 
+clearvars alpha_nr T1_nr signal
 
 %% different TR
 TR = [3, 8, 13, 18]; % ms
@@ -43,6 +46,7 @@ xlabel('alpha (deg)');
 legend(num2str(TR'))
 hold off
 
+clearvars alpha_nr TR_nr signal
 
 %% Estimate T1 from VFA using linear fit of transformed variables
 
@@ -76,4 +80,7 @@ plot(1:45, signal_fit, 'g');
 xlabel('alpha (deg)');
 hold off
 
+%% when moving on dont forget to clear workspace
+clear
+clc
 

@@ -1,6 +1,7 @@
 % Exercise 1: Inversion Recovery (IR): Signal and Fit
 % created: N. Weiskopf, MPI-CBS, Leipzig; 3/6/16
 
+% It is assumed or on the qMRI/workshop/matlab path
 addpath(genpath('./functions/'))
 
 %% Typical values for T1, TR, TI, inversion efficiency at 3T
@@ -122,3 +123,6 @@ plot(TI, fit_signal_r, 'g');
 hold off
 
 
+%% dont forget to clear workspace when moving on
+clear
+clc

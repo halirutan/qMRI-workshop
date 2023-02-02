@@ -17,6 +17,10 @@ To:
 - Use from [Google Colab](https://colab.research.google.com). $\leftarrow$ **Click Link - switch to Github tab on landing page - Search this very github**:`https://github.com/schmidtijoe/qMRI-workshop` and the notebooks should be available to be hosted in Colab. You can execute all cells there and run through in your browser.
 - Run from your own favorite distribution: (check requirements.txt)
 
+## Data
+- For Exercises 1-3 you can find the example data here: [example 3 - data](https://owncloud.gwdg.de/index.php/s/HoY0Kl4aNetZbJA)
+- Exercises 4-5 can be done with example data provided in the respective github repositories (M0_to_PD, MDM_toolbox). See documentation in the matlab scripts.
+
 ## Material / Exercises
 also to be found in the `name_of_file.pdf`
 

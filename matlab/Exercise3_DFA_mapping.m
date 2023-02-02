@@ -9,8 +9,9 @@ addpath(genpath('./functions/'))
 
 %% Load data
 % provide the path to the data downloaded for the exercises,
+% (https://owncloud.gwdg.de/index.php/s/HoY0Kl4aNetZbJA)
 % if you copied to the current directory, this is sufficient
-data_path = './data/';
+data_path = './T1_ex3_data/';
 
 % set values and file names
 TR = 25; %ms
@@ -24,4 +25,18 @@ P_B1map = fullfile(data_path, 'B1map.nii');
 % start spm for helper functions and for displaying results
 spm fmri
 FLASH_DFA_mapping(P_PDw, P_T1w, P_B1map, alpha1, alpha2, TR);
+
+% add load in calculated data
+
+% take a look in spm or your favorite .nii viewer
+% eg: https://socr.umich.edu/HTML5/BrainViewer/
+
+% or plot a montage (bit weird due to orientation)
+plot_data = permute(estimated_T1_B1corr.data, [1 3 2]);
+showMontage(plot_data(:,:,155:5:226));clim([0 4000]);title('T1 in vivo')
+
+%% In case of trouble
+% you can find the estimated t1 maps in the data folder under 'fallback/'
+estimated_T1 = readFileNifti(fullfile(data_path, 'fallback', 'estimated_qt1.nii'));
+estimated_T1_B1corr = readFileNifti(fullfile(data_path, 'fallback', 'estimated_qt1_b1-corrected.nii'));
 

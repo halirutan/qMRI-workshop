@@ -38,6 +38,7 @@ for x_nr=1:size(Y_PDw,1)
                 beta = X\y';
                 % Estimate T1 from slope
                 T1(x_nr,y_nr,z_nr)=beta(2);
+                M0(x_nr,y_nr,z_nr)=beta(1);
 
                 x=[Y_PDw(x_nr,y_nr,z_nr)/tan(alpha1*Y_B1map(x_nr,y_nr,z_nr)), Y_T1w(x_nr,y_nr,z_nr)/tan(alpha2*Y_B1map(x_nr,y_nr,z_nr))];
                 y=[Y_PDw(x_nr,y_nr,z_nr)/sin(alpha1*Y_B1map(x_nr,y_nr,z_nr)), Y_T1w(x_nr,y_nr,z_nr)/sin(alpha2*Y_B1map(x_nr,y_nr,z_nr))];
@@ -47,18 +48,24 @@ for x_nr=1:size(Y_PDw,1)
                 beta = X\y';
                 % Estimate T1 from slope
                 T1_corr(x_nr,y_nr,z_nr)=beta(2);
+                M0_corr(x_nr,y_nr,z_nr)=beta(1);
                              
             else % SNR too low
                 T1(x_nr,y_nr,z_nr)=0;
                 T1_corr(x_nr,y_nr,z_nr)=0;
+                M0(x_nr,y_nr,z_nr)=0;
+                M0_corr(x_nr,y_nr,z_nr)=0;
             end
         end
     end
 end
 
+% calculate the T1 and M0 from the linear regression coefficients
 T1=1./(-log(T1)/TR);
 T1_corr=1./(-log(T1_corr)/TR);
 
+M0=M0./(1-exp(-TR./T1));
+M0_corr=M0_corr./(1-exp(-TR./T1_corr));
 
 % write T1 map
 V_temp = spm_vol(P_PDw);

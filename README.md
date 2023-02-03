@@ -17,7 +17,7 @@ Additionally, you need to get the following dependencies and add them to your ma
 ### python    (Exercises 1 - 3)
 There is jupyter notebooks provided for Exercises *1-3* under `python/`.
 To:
-- Use directly - best open a new tab: [![Binder](/.binder/badge_logo.svg)](https://mybinder.org/v2/gh/schmidtijoe/qMRI-workshop/master) - Navigate to `python/` and run through the notebooks
+- Use directly - best open a new tab: [![Binder](badge_logo.svg)](https://mybinder.org/v2/gh/halirutan/qMRI-workshop/) - Navigate to `python/` and run through the notebooks
 - Use from [Google Colab](https://colab.research.google.com). $\leftarrow$ **Click Link - switch to Github tab on landing page - Search this very github**:`https://github.com/schmidtijoe/qMRI-workshop` and the notebooks should be available to be hosted in Colab. You can execute all cells there and run through in your browser.
 - Run from your own favorite distribution: (check requirements.txt)
 

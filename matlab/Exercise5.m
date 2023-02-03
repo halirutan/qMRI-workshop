@@ -45,7 +45,7 @@ if ~exist(outDir,'dir')
     mkdir(fullfile(currentDir, outDir))
 end
 
-example= MDM_run(R1_path, MTV_path, Seg_path, 1, ...
+example = MDM_run(R1_path, MTV_path, Seg_path, 1, ...
     outDir, {'Parameter_max',2,'Parameter_min',0,'Parameter_str','R1'});
 
 % Please look on the figures and rank the 5 ROIs according to their R1,

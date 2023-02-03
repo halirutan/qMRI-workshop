@@ -26,7 +26,7 @@ To:
 - Exercises 4-5 can be done with example data provided in the respective github repositories (M0_to_PD, MDM_toolbox). See documentation in the matlab scripts.
 
 ## Material / Exercises
-also to be found in the `name_of_file.pdf`
+also to be found in the `exercises.pdf`
 
 The exercises entail questions that should help you understand and explore the simulations and data.
 Some Exercises also have suggestions and further questions in case you are making faster progress or would like to look at them outside the course.

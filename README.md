@@ -101,3 +101,30 @@ Add-ons/practice at home:
 - How is the contrast and signal affected in the weighted images compared to the quantitative maps? 
 - Why does the signal increase towards the cortex – as most easily seen in the PD-weighted image?
 
+### 4)  VFA PD map fit using T1 map regularization of In-Vivo FLASH Acquisition
+This Exercise estimates PD from DFA data (like we handled in the previous exercises). Additional data includes a brain mask and a segmentation.
+Main Script: Exercise4.m
+
+- Load and visualize data
+    - Compare with previous T1 and M0 image. Note additional brain mask and segmentation.
+    - Do you notice the coil gain bias in the M0 image?
+-	Run the PD – analysis script to try to eliminate the bias
+    - Compare output PD to input M0 image
+    - Take a look at the coil gain estimate
+- Find the WF and MTV from the estimated PD
+    - Check typical GM and WM values
+
+Add-ons/practice at home:
+- Try using SPM to get Brain Mask and segmentation like the one provided for the previously used high res data from exercise 3 and run above script.
+
+### 5) Relaxivity fit using R1 and MTV maps
+This Exercise estimates PD from DFA data (like we handled in the previous exercises). Additional data includes a brain mask and a segmentation.
+Main Script: Exercise5.m
+
+- Load and visualize data
+  - R1, MTW and segmentation like in previous exercise – What does the R1 contrast show?
+  - There are 5 ROIs on one hemisphere. Can you tell what are the ROIs?
+-	Calculate linear dependency of R1 and MTV
+  - Run the MDM script
+  - look at the figures and rank the 5 ROIs according to their R1, MTV and relaxivity.
+

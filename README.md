@@ -126,5 +126,5 @@ Main Script: Exercise5.m
   - There are 5 ROIs on one hemisphere. Can you tell what are the ROIs?
 -	Calculate linear dependency of R1 and MTV
   - Run the MDM script
-  - look at the figures and rank the 5 ROIs according to their R1, MTV and relaxivity.
+  - look at the figures and rank the 5 ROIs according to their R1, MTV & relaxivity.
 
